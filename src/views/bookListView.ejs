@@ -100,7 +100,7 @@
 
 
 
-          <!--/stories-->
+          <!--/books-->
 					<% for (var i = 0; i < books.length; i++) {%>
 	          <div class="row">
 	            <br>
@@ -112,7 +112,7 @@
 	              <div class="row">
 	                <div class="col-xs-9">
 	                  <h4><span class="label label-default"><%=books[i].author%></span></h4><h4>
-	                  <small style="font-family:courier,'new courier';" class="text-muted"><a href="/Books/<%=i%>" class="text-muted">Read More</a></small>
+	                  <small style="font-family:courier,'new courier';" class="text-muted"><a href="/Books/<%=books[i]._id%>" class="text-muted">Read More</a></small>
 	                  </h4></div>
 	                <div class="col-xs-3"></div>
 	              </div>
@@ -121,7 +121,7 @@
 	          </div>
 	          <hr>
 					<% } %>
-          <!--/stories-->
+          <!--/books-->
 
 
           <a href="/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
