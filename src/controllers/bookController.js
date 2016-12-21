@@ -80,9 +80,16 @@ var bookController = function(bookService, nav) {
     var deleteBook = function(req, res) {
         var id = new ObjectId(req.params.id);
         mongodb.connect(url, function(err, db) {
-            var collection = db.collection('genres');
-            collection.remove({_id: id});
-            res.redirect('/Books');
+            var collectionBooks = db.collection('books');
+            var collectionGenres = db.collection('genres');
+            collectionBooks.remove({_id: id},
+                function(err, results) {
+                    collectionGenres.update({name: collectionBooks.genre},
+                        {$pull: {books: id}}
+                    );
+                    res.redirect('/Genres');
+                }
+            );
         });
     };
 

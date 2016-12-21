@@ -42,16 +42,34 @@ var genreController = function(nav) {
     var deleteGenre = function(req, res) {
         var id = new ObjectId(req.params.id);
         mongodb.connect(url, function(err, db) {
-            var collection = db.collection('groups');
+            var collection = db.collection('genres');
             collection.remove({_id: id});
             res.redirect('/Genres');
+        });
+    };
+
+    var unlinkBook = function(req, res) {
+        var idGenre = new ObjectId(req.params.idGenre);
+        var idBook = new ObjectId(req.params.idBook);
+        mongodb.connect(url, function(err, db) {
+            var collectionGenres = db.collection('genres');
+            var collectionBooks = db.collection('books');
+            collectionGenres.update({_id: idGenre},
+                {$pull: {books: idBook}},
+                function(err, results) {
+                    collectionBooks.update({_id: idBook},
+                        {$pull: {genre: collectionGenres.name}}
+                    );
+                    res.redirect('/Genres');
+                });
         });
     };
 
     return {
         getIndex: getIndex,
         addGenre: addGenre,
-        deleteGenre: deleteGenre
+        deleteGenre: deleteGenre,
+        unlinkBook: unlinkBook
     };
 };
 

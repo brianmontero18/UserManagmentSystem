@@ -86,12 +86,6 @@
 					Add new Genre
 					<form name="addGenre" action="/Genres" method="post">
 						Name: <input type="text" name="name" id="name" >
-						<select name="genre">
-							<option value="" disabled selected>Select genre</option>
-							<% for (var i = 0; i < genres.length; i++) {%>
-								<option value="<%=genres[i].name%>"><%=genres[i].name%></option>
-								<%}%>
-							</select>
 							<input type="submit" value="Save">
 						</form>
 					</div>
@@ -131,19 +125,24 @@
 											<% if (genres[i].books[j].toString() == books[k]._id.toString()) { %>
 												<div class="col-xs-9">
 												<h4><span class="label label-default"><%=books[k].title%></span></h4>
+												<form method="POST" action="/Genres/<%=genres[i]._id.valueOf()%>/<%=books[k]._id.valueOf()%>" enctype="application/x-www-form-urlencoded">
+													<input type="hidden" name="_method" value="PUT"/>
+													<button type="submit"> Unlink from genre</button>
+												</form>
 												</div>
 											    <%}%>
 											<%}%>
 										<%}%>
 
-
+										<% if (genres[i].books[0] == null) { %>
 											<div class="col-xs-9">
-													<form method="POST" action="/Genres/<%=genres[i]._id%>" enctype="application/x-www-form-urlencoded">
-														<input type="hidden" name="_method" value="DELETE"/>
-														<button type="submit">Delete resource</button>
-													</form>
-												</h4>
+											<form method="POST" action="/Genres/<%=genres[i]._id%>" enctype="application/x-www-form-urlencoded">
+											<input type="hidden" name="_method" value="DELETE"/>
+											<button style="color: red" type="submit">Delete genre</button>
+											</form>
+											</h4>
 											</div>
+										<%}%>
 											<div class="col-xs-3"></div>
 										</div>
 										<br><br>

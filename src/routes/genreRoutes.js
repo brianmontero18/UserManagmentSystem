@@ -10,8 +10,11 @@ var router = function(nav) {
         .get(genreController.getIndex)
         .post(genreController.addGenre);
 
-    genreRouter.route('/:id')
+    genreRouter.route('/:id/')
         .delete(genreController.deleteGenre);
+
+    genreRouter.route('/:idGenre/:idBook')
+        .put(genreController.unlinkBook);
 
     return genreRouter;
 };
