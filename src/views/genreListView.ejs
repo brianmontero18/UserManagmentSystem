@@ -85,11 +85,11 @@
 				<div class="col-md-12">
 					Add new Genre
 					<form name="addGenre" action="/Genres" method="post">
-						Name: <input type="text" name="genre" id="genre" >
+						Name: <input type="text" name="name" id="name" >
 						<select name="genre">
 							<option value="" disabled selected>Select genre</option>
 							<% for (var i = 0; i < genres.length; i++) {%>
-								<option value="<%=genres[i].genre%>"><%=genres[i].genre%></option>
+								<option value="<%=genres[i].name%>"><%=genres[i].name%></option>
 								<%}%>
 							</select>
 							<input type="submit" value="Save">
@@ -124,12 +124,16 @@
 										<a class="story-title" href="#"><img alt="" src="http://api.randomuser.me/portraits/thumb/men/58.jpg" style="width:100px;height:100px" class="img-circle"></a>
 									</div>
 									<div class="col-md-10 col-sm-9">
-										<h3><%=genres[i].genre%></h3>
+										<h3><%=genres[i].name%></h3>
 										<div class="row">
-										<% for (var j = 0; j < genres[i].book.length; j++) {%>
-											<div class="col-xs-9">
-											<h4><span class="label label-default"><%=genres[i].book[j].title%></span></h4>
-											</div>
+										<% for (var j = 0; j < genres[i].books.length; j++){%>
+											<% for (var k = 0; k < books.length; k++) { %>
+											<% if (genres[i].books[j].toString() == books[k]._id.toString()) { %>
+												<div class="col-xs-9">
+												<h4><span class="label label-default"><%=books[k].title%></span></h4>
+												</div>
+											    <%}%>
+											<%}%>
 										<%}%>
 
 

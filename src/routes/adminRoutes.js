@@ -5,33 +5,11 @@ var mongodb = require('mongodb').MongoClient;
 var genres = [
     {
         name: 'Adventures',
-        books: [
-            {
-                title: 'War and Peace',
-                author: 'Lev Tolstoy',
-                read: false
-            },
-            {
-                title: 'El señor de los anillos',
-                author: 'J. R. R. Tolkien',
-                read: false
-            }
-        ]
+        books: []
     },
     {
         name: 'Drama',
-        books: [
-            {
-                title: 'A Dolls House',
-                author: 'Henrik Ibsen',
-                read: false
-            },
-            {
-                title: 'A Sentimental Education',
-                author: 'Gustave Flaubert',
-                read: false
-            }
-        ]
+        books: []
     },
 ];
 

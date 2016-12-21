@@ -89,8 +89,8 @@
 						Author: <input type="text" name="author" id="author">
 						<select name="genre">
 							<option value="" disabled selected>Select genre</option>
-							<% for (var i = 0; i < groups.length; i++) {%>
-								<option value="<%=groups[i].genre%>"><%=groups[i].genre%></option>
+							<% for (var i = 0; i < genres.length; i++) {%>
+								<option value="<%=genres[i].name%>"><%=genres[i].name%></option>
 								<%}%>
 							</select>
 							<input type="submit" value="Save">
@@ -118,7 +118,7 @@
 
 
 								<!--/books-->
-							<% for (var i = 0; i < books.length; i++) {%>
+							<% for (var i = 0; i < books.length; i++) { %>
 								<div class="row">
 									<br>
 									<div class="col-md-2 col-sm-3 text-center">
@@ -145,7 +145,7 @@
 									</div>
 								</div>
 								<hr>
-							<%}%>
+							  <%}%>
 								<!--/books-->
 
 

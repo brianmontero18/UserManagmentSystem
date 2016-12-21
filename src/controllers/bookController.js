@@ -12,21 +12,21 @@ var bookController = function(bookService, nav) {
     };
 
     var getIndex = function(req, res) {
-            var collectionBooks = [];
             mongodb.connect(url, function(err, db) {
+                var collectionBooks = [];
                 db.collection('books').find({}).toArray(
                     function(err, results) {
                         collectionBooks = results;
                     }
                 );
-                db.collection('groups').find({}).toArray(
+
+                db.collection('genres').find({}).toArray(
                     function(err, results) {
-                        var collectionGroups = results;
                         res.render('bookListView', {
                             title: 'Books',
                             nav: nav,
-                            books: collectionBooks,
-                            groups: results
+                            genres: results,
+                            books: collectionBooks
                         });
                     });
             });
@@ -54,7 +54,8 @@ var bookController = function(bookService, nav) {
 
     var addBook = function(req, res) {
         mongodb.connect(url, function(err, db) {
-            var collection = db.collection('groups');
+            var collectionGenres = db.collection('genres');
+            var collectionBooks = db.collection('books');
             var book = {
                 title: req.body.title,
                 author: req.body.author,
@@ -62,17 +63,24 @@ var bookController = function(bookService, nav) {
                 read: false
             };
 
-            collection.insert(book,
-                function(err, results) {
-                    res.redirect('/Books');
+            collectionBooks.insert(book,
+                function(err, resultsBook) {
+                    collectionGenres.update(
+                        {name: req.body.genre},
+                        {$push: {'books': resultsBook.ops[0]._id}},
+                        function(err, results) {
+                            res.redirect('/Books');
+                        }
+                    );
                 });
+
         });
     };
 
     var deleteBook = function(req, res) {
         var id = new ObjectId(req.params.id);
         mongodb.connect(url, function(err, db) {
-            var collection = db.collection('books');
+            var collection = db.collection('genres');
             collection.remove({_id: id});
             res.redirect('/Books');
         });

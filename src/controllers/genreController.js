@@ -5,21 +5,20 @@ var genreController = function(nav) {
     var url = 'mongodb://localhost:27017/ums';
 
     var getIndex = function(req, res) {
-            var collectionGenres = [];
             mongodb.connect(url, function(err, db) {
-                db.collection('groups').find({}).toArray(
-                    function(err, results) {
-                        collectionGenres = results;
-                    }
-                );
+                var collectionBooks = [];
                 db.collection('books').find({}).toArray(
                     function(err, results) {
-                        var collectionGroups = results;
+                        collectionBooks = results;
+                    }
+                );
+                db.collection('genres').find({}).toArray(
+                    function(err, results) {
                         res.render('genreListView', {
                             title: 'Genres',
                             nav: nav,
-                            genres: collectionGenres,
-                            books: results
+                            genres: results,
+                            books: collectionBooks
                         });
                     });
             });
@@ -27,9 +26,9 @@ var genreController = function(nav) {
 
     var addGenre = function(req, res) {
         mongodb.connect(url, function(err, db) {
-            var collection = db.collection('groups');
+            var collection = db.collection('genres');
             var genre = {
-                genre: req.body.genre,
+                name: req.body.name,
                 books: []
             };
 
