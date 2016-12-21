@@ -9,10 +9,12 @@ var router = function(nav) {
     bookRouter.use(bookController.middleware);
 
     bookRouter.route('/')
-        .get(bookController.getIndex);
+        .get(bookController.getIndex)
+        .post(bookController.addBook);
 
     bookRouter.route('/:id')
-        .get(bookController.getById);
+        .get(bookController.getById)
+        .delete(bookController.deleteBook);
 
     return bookRouter;
 };

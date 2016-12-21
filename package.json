@@ -17,6 +17,7 @@
     "express-session": "^1.14.2",
     "http": "0.0.0",
     "jade": "^1.11.0",
+    "method-override": "^2.3.7",
     "mongodb": "^2.2.16",
     "mssql": "^3.3.0",
     "passport": "^0.3.2",

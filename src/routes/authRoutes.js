@@ -6,7 +6,6 @@ var passport = require('passport');
 var router = function() {
     authRouter.route('/signUp')
         .post(function(req, res) {
-            console.log(req.body);
             var url = 'mongodb://localhost:27017/ums';
             mongodb.connect(url, function(err, db) {
                 var collection = db.collection('users');
@@ -30,6 +29,7 @@ var router = function() {
         }), function (req, res) {
             res.redirect('/auth/profile');
         });
+
     authRouter.route('/profile')
         .all(function(req, res, next) {
             if (!req.user) {

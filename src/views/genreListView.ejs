@@ -62,7 +62,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-7">
-						<h1>List of Books
+						<h1>List of Genres
 							<p class="lead"></p>
 						</h1>
 					</div>
@@ -83,14 +83,13 @@
 
 
 				<div class="col-md-12">
-					Add new Book
-					<form name="addUsers" action="/Books%>" method="post">
-						Title: <input type="text" name="title" id="title" >
-						Author: <input type="text" name="author" id="author">
+					Add new Genre
+					<form name="addGenre" action="/Genres" method="post">
+						Name: <input type="text" name="genre" id="genre" >
 						<select name="genre">
 							<option value="" disabled selected>Select genre</option>
-							<% for (var i = 0; i < groups.length; i++) {%>
-								<option value="<%=groups[i].genre%>"><%=groups[i].genre%></option>
+							<% for (var i = 0; i < genres.length; i++) {%>
+								<option value="<%=genres[i].genre%>"><%=genres[i].genre%></option>
 								<%}%>
 							</select>
 							<input type="submit" value="Save">
@@ -117,23 +116,25 @@
 
 
 
-								<!--/books-->
-							<% for (var i = 0; i < books.length; i++) {%>
+						<!--/genres-->
+							<% for (var i = 0; i < genres.length; i++) {%>
 								<div class="row">
 									<br>
 									<div class="col-md-2 col-sm-3 text-center">
 										<a class="story-title" href="#"><img alt="" src="http://api.randomuser.me/portraits/thumb/men/58.jpg" style="width:100px;height:100px" class="img-circle"></a>
 									</div>
 									<div class="col-md-10 col-sm-9">
-										<h3><%=books[i].title%></h3>
+										<h3><%=genres[i].genre%></h3>
 										<div class="row">
+										<% for (var j = 0; j < genres[i].book.length; j++) {%>
 											<div class="col-xs-9">
-												<h4><span class="label label-default"><%=books[i].author%></span></h4>
+											<h4><span class="label label-default"><%=genres[i].book[j].title%></span></h4>
 											</div>
+										<%}%>
+
+
 											<div class="col-xs-9">
-												<h4><span class="label label-default"><%=books[i].genre%></span></h4><h4>
-													<small style="font-family:courier,'new courier';" class="text-muted"><a href="/Books/<%=books[i]._id%>" class="text-muted">Read More</a></small>
-													<form method="POST" action="/Books/<%=books[i]._id%>" enctype="application/x-www-form-urlencoded">
+													<form method="POST" action="/Genres/<%=genres[i]._id%>" enctype="application/x-www-form-urlencoded">
 														<input type="hidden" name="_method" value="DELETE"/>
 														<button type="submit">Delete resource</button>
 													</form>
@@ -146,58 +147,59 @@
 								</div>
 								<hr>
 							<%}%>
-								<!--/books-->
+								<!--/genres-->
 
 
-								<a href="/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
 
+						<a href="/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a>
 
-							</div>
-						</div>
-
-					</div><!--/col-12-->
-				</div>
-			</div>
-
-
-			<hr>
-
-			<div class="container" id="footer">
-				<div class="row">
-					<div class="col col-sm-12">
-
-						<h1>Follow Us</h1>
-						<div class="btn-group">
-							<a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
-							<a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
-							<a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
-						</div>
 
 					</div>
 				</div>
-			</div>
 
-			<hr>
+			</div><!--/col-12-->
+		</div>
+	</div>
 
-			<hr>
 
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6">
-							<ul class="list-inline">
-								<li><i class="icon-facebook icon-2x"></i></li>
-								<li><i class="icon-twitter icon-2x"></i></li>
-								<li><i class="icon-google-plus icon-2x"></i></li>
-								<li><i class="icon-pinterest icon-2x"></i></li>
-							</ul>
+	<hr>
 
-						</div>
-						<div class="col-sm-6">
-							<p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a></p>
-						</div>
-					</div>
+	<div class="container" id="footer">
+		<div class="row">
+			<div class="col col-sm-12">
+
+				<h1>Follow Us</h1>
+				<div class="btn-group">
+					<a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
+					<a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
+					<a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
 				</div>
-			</footer>
-		</body>
-		</html>
+
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<hr>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<ul class="list-inline">
+						<li><i class="icon-facebook icon-2x"></i></li>
+						<li><i class="icon-twitter icon-2x"></i></li>
+						<li><i class="icon-google-plus icon-2x"></i></li>
+						<li><i class="icon-pinterest icon-2x"></i></li>
+					</ul>
+
+				</div>
+				<div class="col-sm-6">
+					<p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
